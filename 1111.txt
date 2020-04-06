@@ -1,0 +1,151 @@
+
+graph = {
+'a':{'b':3,'c':42, 'd':7},
+'b':{'c':1,'f':5},
+'c':{'f':16,'d':2},
+'d':{'e':34, 'g':6},
+'e':{'g':3, 'h':14},
+'f':{'e':10, 'h':18},
+'g':{'h':2},
+'h':{'g':2}
+}
+
+
+def dijikstra(graph,start,end):
+
+    shortest_distance = {} 
+    predecessor = {}
+    unseennodes = graph 
+    infinity = 5000
+    path = [] 
+
+
+    for node in unseennodes:
+        shortest_distance[node] = infinity
+
+    shortest_distance[start] = 0
+
+
+    while (unseennodes):
+        min_distance_node = None
+
+        for node in unseennodes:
+            if min_distance_node is None:
+                min_distance_node = node
+
+            elif shortest_distance[node] < shortest_distance[min_distance_node]:
+                min_distance_node = node
+
+
+
+        path_options = graph[min_distance_node].items()
+
+
+        for child_node, weight in path_options:
+
+            if (weight + shortest_distance[min_distance_node] < shortest_distance[child_node]):
+
+                shortest_distance[child_node] = weight + shortest_distance[min_distance_node]
+
+                predecessor[child_node] = min_distance_node
+
+
+        unseennodes.pop(min_distance_node)
+
+
+
+    currentNode = end
+
+    while (currentNode != start):
+
+        try:
+            path.insert(0,currentNode)
+            currentNode = predecessor[currentNode]
+        except KeyError:
+            print('Path not reachable')
+            break
+    path.insert(0,start)
+
+
+
+    if (shortest_distance[end] != infinity):
+        print('Shortest distance is ' + str(shortest_distance[end]))
+        print('And the path is ' + str(path))
+
+
+dijikstra(graph, 'a', 'h')#assigning the points to dictionary
+graph = {
+'a':{'b':3,'c':42, 'd':7},
+'b':{'c':1,'f':5},
+'c':{'f':16,'d':2},
+'d':{'e':34, 'g':6},
+'e':{'g':3, 'h':14},
+'f':{'e':10, 'h':18},
+'g':{'h':2},
+'h':{'g':2}
+}
+
+
+def dijikstra(graph,start,end):
+
+    shortest_distance = {} 
+    predecessor = {}
+    unseennodes = graph 
+    infinity = 5000
+    path = [] 
+
+
+    for node in unseennodes:
+        shortest_distance[node] = infinity
+
+    shortest_distance[start] = 0
+
+
+    while (unseennodes):
+        min_distance_node = None
+
+        for node in unseennodes:
+            if min_distance_node is None:
+                min_distance_node = node
+
+            elif shortest_distance[node] < shortest_distance[min_distance_node]:
+                min_distance_node = node
+
+
+
+        path_options = graph[min_distance_node].items()
+
+
+        for child_node, weight in path_options:
+
+            if (weight + shortest_distance[min_distance_node] < shortest_distance[child_node]):
+
+                shortest_distance[child_node] = weight + shortest_distance[min_distance_node]
+
+                predecessor[child_node] = min_distance_node
+
+
+        unseennodes.pop(min_distance_node)
+
+
+
+    currentNode = end
+
+    while (currentNode != start):
+
+        try:
+            path.insert(0,currentNode)
+            currentNode = predecessor[currentNode]
+        except KeyError:
+            print('Path not reachable')
+            break
+    path.insert(0,start)
+
+
+
+    if (shortest_distance[end] != infinity):
+        print('Shortest distance is ' + str(shortest_distance[end]))
+        print('And the path is ' + str(path))
+
+
+dijikstra(graph, 'a', 'h')
